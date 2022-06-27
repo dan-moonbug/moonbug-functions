@@ -54,6 +54,10 @@ def find_keywords_sep(csv, colum):
 
 def count(b, themes,df,colum):
     l= []
+    try:
+        a = df[colum]
+    except Exception:
+        print("wrong cloumn name")
     ind_value=[]
     for i in range(len(b)):
         ind_value.append([])
@@ -98,12 +102,14 @@ def count(b, themes,df,colum):
 
 def make_themes(lis):
     #themes = []
-    with open(lis) as f:
-        lines = f.read()
+    try:
+        with open(lis) as f:
+            lines = f.read()
 
-        x = lines.split("\n")
-        #themes.append(x)
-   
+            x = lines.split("\n")
+            #themes.append(x)
+    except Exception:
+        print("search_term file not found or in wrong format\ncheck if file is a .txt file and has one search term per line")
     return(x)
 
 
@@ -115,10 +121,18 @@ def search_themes( df,list_files, colum, b):
 
 
 def search(search_list,csv_file, colum,save_file):
-    df_org = pd.read_csv(csv_file)
+    try:
+        df_org = pd.read_csv(csv_file)
+    except Exception:
+        print("csv directory not found\ncheck if it is the correct directory path and speeled corectly")
+        return -1
+
     dir_org = "/".join(csv_file.split("/")[:-1])
     values = list(df_org.columns)
-    x = search_themes(df_org, search_list, colum, values)
+    try:
+        x = search_themes(df_org, search_list, colum, values)
+    except Exception:
+        return -1
     df = pd.DataFrame(({'video tital' : x[2]}))
     #print(len(x[2]))
     for i in range(len(x[1])):
@@ -192,4 +206,3 @@ def themes(csv_file,colum,save_file):
             df2[columns[q]] = header[q]
     df2.to_csv(dir_org +"/" + save_file)
     return(df2)
-
