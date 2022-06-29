@@ -100,13 +100,21 @@ def count(b, themes,df,colum):
 
 
 
+throw = ["and", "And", "the", "The", "with", "With", "for", "For" , "You", "get", "Get"]
+
+
 def make_themes(lis):
     #themes = []
+    x = []
     try:
         with open(lis) as f:
             lines = f.read()
 
-            x = lines.split("\n")
+            y = lines.split("\n")
+            for i in y:
+                if i not in throw:
+                    if len(i)>2:
+                        x.append(i)
             #themes.append(x)
     except Exception:
         print("search_term file not found or in wrong format\ncheck if file is a .txt file and has one search term per line")
