@@ -14,7 +14,7 @@ def sum_of_list(l):
                 pass
                 
     return total
-
+throw = ["and", "And", "the", "The", "with", "With", "for", "For" , "You", "get", "Get"]
 
 def find_keywords(csv, colum, dir_file):
     s = set()
@@ -23,7 +23,9 @@ def find_keywords(csv, colum, dir_file):
         if type(i)== str:
             x = re.findall(r"[\w']+", i)
             for item in x:
-                s.add(item)
+                if item not in throw:
+                    if len(item)>2:
+                        s.add(item)
         else:
             print(i)
         with open(dir_file, 'w') as f:
@@ -39,8 +41,10 @@ def find_keywords_sep(csv, colum):
         if type(i)== str:
             x = re.findall(r"[\w']+", i)
             for item in x:
-                if len(item) > 2:
-                    s.add(item)
+                if item not in throw:
+                    if len(item)>2:
+                
+                        s.add(item)
                     
     newpath = (dir_file +"/" + "keywords")
     if not os.path.exists(newpath):
