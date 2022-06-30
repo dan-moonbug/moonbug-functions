@@ -210,7 +210,7 @@ def themes(csv_file,colum,save_file):
             
         counter = counter +1
         if (counter % 10)==0 :
-            print(str(counter) + "/" + str(len(os.listdir(dir_org + "/" + "keywords"))))           
+            print(counter/(len(os.listdir(dir_org + "/" + "keywords")))          
    
     df2 = pd.DataFrame(({'key word' : name,'number of videos' : number}))
     for q in range(len(columns)):
