@@ -157,8 +157,7 @@ def search(search_list,csv_file, colum,save_file):
     return(df)
 
 
-def search_nosave( search_list,csv_file, colum):
-    df_org = pd.read_csv(csv_file)
+def search_nosave( search_list,df_org, colum):
     values = list(df_org.columns)
     x = search_themes(df_org, search_list, colum, values)
     df = pd.DataFrame(({'video tital' : x[2]}))
@@ -187,7 +186,7 @@ def themes(csv_file,colum,save_file):
     counter = 0
     find_keywords_sep(csv_file, colum)
     for i in os.listdir(dir_org + "/" + "keywords"):
-        df = search_nosave(dir_org + "/" + "keywords/" + i, csv_file , colum)
+        df = search_nosave(dir_org + "/" + "keywords/" + i, df_og , colum)
         columns =[]
         number.append(len(df))
         name.append(i.split(".")[0])
@@ -210,7 +209,7 @@ def themes(csv_file,colum,save_file):
             
         counter = counter +1
         if (counter % 10)==0 :
-            print((counter/(len(os.listdir(dir_org + "/" + "keywords")*100))))          
+            print(str(counter) + "/" + str(len(os.listdir(dir_org + "/" + "keywords"))))           
    
     df2 = pd.DataFrame(({'key word' : name,'number of videos' : number}))
     for q in range(len(columns)):
